@@ -1,5 +1,6 @@
+import { readdir, readFile, writeFile } from "fs/promises";
+import { parse } from "@swc/core";
 import { join, resolve } from "path";
-import { readdir, readFile, rm, writeFile, mkdir } from "fs/promises";
 
 /**
  * Recursively get all files in a directory
@@ -11,15 +12,12 @@ async function* getFiles(directory: string): AsyncIterable<string> {
   const contents = await readdir(directory, { withFileTypes: true });
   for (const item of contents) {
     const res = resolve(directory, item.name);
-    if (item.isDirectory()) {
-      yield* getFiles(res);
-    } else {
-      yield res;
-    }
+    if (item.isDirectory()) yield* getFiles(res);
+    else yield res;
   }
 }
 
-export const build = async () => {
+export const build = async (): Promise<void> => {
   let appJs = await readFile(
     join(".", "framework", "templates", "express.ts"),
     "utf8"
@@ -28,23 +26,62 @@ export const build = async () => {
   const now = Date.now();
   for await (const file of getFiles(join("example", "routes"))) {
     const contents = await readFile(file, "utf8");
-    const key = `Route_${Math.random().toString(36).substring(2)}`;
-    const route = file
-      .replace(join(__dirname, "..", "example", "routes"), "")
-      .replace(/.ts$/, "")
-      .replace(/index/g, "");
-    console.log(`Mapped ${route}`);
+    const parsed = await parse(contents, { syntax: "typescript" });
 
-    appJs = appJs.replace(
-      "// inject-routes",
-      `import { get as ${key} } from "./routes${route}";
+    const verbs = new Set<string>();
+    parsed.body.forEach((i): void => {
+      if (i.type === "ExportDeclaration")
+        if (i.declaration.type === "VariableDeclaration")
+          i.declaration.declarations.forEach((j): void => {
+            if (j.id.type === "Identifier") verbs.add(j.id.value);
+          });
+    });
 
-app.get("${route}", (request, response) => {
-  return ${key}(transformRequestParams(request, response));
+    verbs.forEach((verb): void => {
+      if (
+        ![
+          "get",
+          "head",
+          "post",
+          "put",
+          "delete",
+          "connect",
+          "options",
+          "trace",
+          "patch",
+        ].includes(verb)
+      )
+        return;
+
+      const route = file
+        .replace(join(__dirname, "..", "example", "routes"), "")
+        .replace(/.ts$/, "")
+        .replace(/index/g, "");
+      const key = `${verb}${route.replace(/\W/g, "_")}`;
+
+      appJs = appJs.replace(
+        "// inject-routes",
+        `import { ${verb} as ${key} } from "./routes${route}";
+
+app.${verb}("${route}", (request, response) => {
+  return transformResponse({ route: ${key}, request, response });
 });
 
 // inject-routes`
-    );
+      );
+
+      if (verb === "get")
+        appJs = appJs.replace(
+          "// inject-routes",
+          `app.head("${route}", (request, response) => {
+  return transformResponse({ route: ${key}, request, response });
+});
+
+// inject-routes`
+        );
+
+      console.log(`Mapped ${verb} ${route}`);
+    });
   }
 
   await writeFile(join("example", "dist.ts"), appJs);
