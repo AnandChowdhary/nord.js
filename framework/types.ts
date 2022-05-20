@@ -1,10 +1,11 @@
-import type Joi from "joi";
 import type { Request, Response } from "express";
 
 export interface RequestParams {
-  request: Request;
-  response: Response;
-  body: <T>(schema?: Joi.PartialSchemaMap<T>) => T;
+  route: string;
+  path: string;
+  ipAddress: string;
+  body: <T>(schema?: T) => T;
+  _original: { request: Request; response: Response };
 }
 
 export type JsonResponse = any;

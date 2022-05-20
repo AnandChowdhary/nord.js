@@ -13,7 +13,7 @@ export const get: Route = async (): Promise<{ success: boolean }> => {
   return { success: true };
 };
 
-export const post: Route = ({ body }): { result: string } => {
+export const post: Route = ({ body, request }): { result: string } => {
   const { name } = body<{
     /**
      * First name of the customer

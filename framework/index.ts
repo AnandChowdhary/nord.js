@@ -50,7 +50,7 @@ export const build = async (): Promise<void> => {
         `import { ${verb} as ${key} } from "./routes${route}";
 
 app.${verb}("${route}", (request, response) => {
-  return transformResponse({ route: ${key}, request, response });
+  return transformResponse({ method: ${key}, route: "${route}", request, response });
 });
 
 // inject-routes`
@@ -60,7 +60,7 @@ app.${verb}("${route}", (request, response) => {
         appJs = appJs.replace(
           "// inject-routes",
           `app.head("${route}", (request, response) => {
-  return transformResponse({ route: ${key}, request, response });
+  return transformResponse({ method: ${key}, route: "${route}", request, response });
 });
 
 // inject-routes`
