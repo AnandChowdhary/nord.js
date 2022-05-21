@@ -4,13 +4,10 @@ import { join } from "path";
 import { getFiles } from "./helpers";
 
 export const build = async (): Promise<void> => {
-  let appJs = await readFile(
-    join(".", "framework", "templates", "express.ts"),
-    "utf8"
-  );
+  let appJs = await readFile(join(__dirname, "..", "src", "app.ts"), "utf8");
 
   const now = Date.now();
-  for await (const file of getFiles(join("example", "routes"))) {
+  for await (const file of getFiles(join(".", "routes"))) {
     const contents = await readFile(file, "utf8");
     const parsed = await parse(contents, { syntax: "typescript" });
 
@@ -40,7 +37,7 @@ export const build = async (): Promise<void> => {
         return;
 
       const route = file
-        .replace(join(__dirname, "..", "example", "routes"), "")
+        .replace(join(".", "routes"), "")
         .replace(/.ts$/, "")
         .replace(/index/g, "");
       const key = `${verb}${route.replace(/\W/g, "_")}`;
@@ -48,11 +45,9 @@ export const build = async (): Promise<void> => {
       appJs = appJs.replace(
         "// inject-routes",
         `import { ${verb} as ${key} } from "./routes${route}";
-
 app.${verb}("${route}", (request, response) => {
   return transformResponse({ method: ${key}, route: "${route}", request, response });
 });
-
 // inject-routes`
       );
 
@@ -62,7 +57,6 @@ app.${verb}("${route}", (request, response) => {
           `app.head("${route}", (request, response) => {
   return transformResponse({ method: ${key}, route: "${route}", request, response });
 });
-
 // inject-routes`
         );
 
@@ -70,8 +64,6 @@ app.${verb}("${route}", (request, response) => {
     });
   }
 
-  await writeFile(join("example", "dist.ts"), appJs);
+  await writeFile(join(".", "dist.ts"), appJs);
   console.log(`Compiled in ${Date.now() - now}ms`);
 };
-
-build();

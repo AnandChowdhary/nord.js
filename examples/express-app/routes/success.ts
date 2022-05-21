@@ -1,5 +1,5 @@
-import type { Route } from "web-framework/framework/types";
-import { BadRequestException } from "web-framework/framework/errors";
+import type { Route } from "@nordjs/types";
+import { BadRequestException } from "@nordjs/errors";
 
 /**
  * Returns a success message, and randomly throws a bad request exception
@@ -13,13 +13,15 @@ export const get: Route = async (): Promise<{ success: boolean }> => {
   return { success: true };
 };
 
-export const post: Route = ({ body, request }): { result: string } => {
-  const { name } = body<{
+export const post: Route<{
+  body: {
     /**
      * First name of the customer
      * @maxLength 64
      */
     name: string;
-  }>();
+  };
+}> = ({ body }): { result: string } => {
+  const { name } = body();
   return { result: `hello ${name}` };
 };

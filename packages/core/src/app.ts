@@ -1,7 +1,7 @@
 import express from "express";
 import { getClientIp } from "@supercharge/request-ip";
 import type { Request, Response } from "express";
-import type { Route } from "../types";
+import type { Route } from "@nordjs/types";
 
 const app = express();
 const port = 3000;

@@ -10,4 +10,6 @@ export interface RequestParams {
 
 export type JsonResponse = any;
 
-export type Route = (params: RequestParams) => JsonResponse;
+export type Route<T extends { body?: any } = { body?: any }> = (
+  params: RequestParams
+) => JsonResponse;
