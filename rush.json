@@ -400,6 +400,14 @@
       "projectFolder": "packages/types"
     },
     {
+      "packageName": "@nordjs/errors",
+      "projectFolder": "packages/errors"
+    },
+    {
+      "packageName": "@nordjs/cli",
+      "projectFolder": "packages/cli"
+    },
+    {
       "packageName": "@nordjs/example-express-app",
       "projectFolder": "examples/express-app"
     }

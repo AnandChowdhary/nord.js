@@ -6,12 +6,23 @@ import type { Route } from "@nordjs/types";
 const app = express();
 const port = 3000;
 
-import { get as get_Users_anandchowdhary_Projects_web_framework_examples_express_app__ } from "./routes/Users/anandchowdhary/Projects/web-framework/examples/express-app//";
-app.get("/Users/anandchowdhary/Projects/web-framework/examples/express-app//", (request, response) => {
-  return transformResponse({ method: get_Users_anandchowdhary_Projects_web_framework_examples_express_app__, route: "/Users/anandchowdhary/Projects/web-framework/examples/express-app//", request, response });
+import { get as get_ } from "./routes/";
+app.get("/", (request, response) => {
+  return transformResponse({ method: get_, route: "/", request, response });
 });
-app.head("/Users/anandchowdhary/Projects/web-framework/examples/express-app//", (request, response) => {
-  return transformResponse({ method: get_Users_anandchowdhary_Projects_web_framework_examples_express_app__, route: "/Users/anandchowdhary/Projects/web-framework/examples/express-app//", request, response });
+app.head("/", (request, response) => {
+  return transformResponse({ method: get_, route: "/", request, response });
+});
+import { get as get_success } from "./routes/success";
+app.get("/success", (request, response) => {
+  return transformResponse({ method: get_success, route: "/success", request, response });
+});
+app.head("/success", (request, response) => {
+  return transformResponse({ method: get_success, route: "/success", request, response });
+});
+import { post as post_success } from "./routes/success";
+app.post("/success", (request, response) => {
+  return transformResponse({ method: post_success, route: "/success", request, response });
 });
 // inject-routes
 
@@ -33,6 +44,8 @@ export const transformResponse = async ({
   const result = await method({
     route,
     path: request.path,
+    query: () => ({}),
+    params: () => ({}),
     ipAddress: getClientIp(request),
     body: <T>(schema?: T) => {
       const body = request.body;

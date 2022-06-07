@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { build } from "./index";
+import { build } from "./build";
 
 void (async (): Promise<void> => {
   const command = process.argv.pop();

@@ -1,24 +1,26 @@
 {
-  "name": "@nordjs/core",
+  "name": "@nordjs/cli",
   "version": "0.0.0",
   "description": "",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
+  "bin": {
+    "nord": "dist/index.js"
+  },
   "scripts": {
     "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@nordjs/core": "workspace:*",
+    "@swc/core": "~1.2.189",
+    "@swc-node/register": "~1.5.1"
+  },
   "devDependencies": {
     "typescript": "~4.6.4"
-  },
-  "dependencies": {
-    "@supercharge/request-ip": "~1.2.0",
-    "express": "~4.18.1",
-    "http-status-codes": "~2.2.0",
-    "@nordjs/types": "workspace:*"
   }
 }

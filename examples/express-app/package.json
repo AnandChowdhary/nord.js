@@ -13,7 +13,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@nordjs/core": "workspace:*"
+    "@nordjs/cli": "workspace:*",
+    "@nordjs/errors": "workspace:*"
   },
   "devDependencies": {
     "@nordjs/types": "workspace:*"

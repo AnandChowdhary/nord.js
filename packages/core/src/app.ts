@@ -26,6 +26,8 @@ export const transformResponse = async ({
   const result = await method({
     route,
     path: request.path,
+    query: () => ({}),
+    params: () => ({}),
     ipAddress: getClientIp(request),
     body: <T>(schema?: T) => {
       const body = request.body;
