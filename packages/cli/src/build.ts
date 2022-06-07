@@ -4,10 +4,7 @@ import { join, resolve } from "path";
 import { getFiles } from "./helpers";
 
 export const build = async (): Promise<void> => {
-  let appJs = await readFile(
-    join(__dirname, "..", "node_modules", "@nordjs", "core", "src", "app.ts"),
-    "utf8"
-  );
+  let appJs = await readFile(join(".", "app.ts"), "utf8");
 
   const now = Date.now();
   for await (const file of getFiles(join(".", "routes"))) {
@@ -46,21 +43,21 @@ export const build = async (): Promise<void> => {
       const key = `${verb}${route.replace(/\W/g, "_")}`;
 
       appJs = appJs.replace(
-        "// inject-routes",
+        "injectRoutes()",
         `import { ${verb} as ${key} } from "./routes${route}";
 app.${verb}("${route}", (request, response) => {
-  return transformResponse({ method: ${key}, route: "${route}", request, response });
+  return injectRoutes({ method: ${key}, route: "${route}", request, response });
 });
-// inject-routes`
+injectRoutes()`
       );
 
       if (verb === "get")
         appJs = appJs.replace(
-          "// inject-routes",
+          "injectRoutes()",
           `app.head("${route}", (request, response) => {
-  return transformResponse({ method: ${key}, route: "${route}", request, response });
+  return injectRoutes({ method: ${key}, route: "${route}", request, response });
 });
-// inject-routes`
+injectRoutes()`
         );
 
       console.log(`Mapped ${verb.toUpperCase()} ${route}`);

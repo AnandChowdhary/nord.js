@@ -8,13 +8,19 @@ importers:
   ../../examples/express-app:
     specifiers:
       '@nordjs/cli': workspace:*
+      '@nordjs/core': workspace:*
       '@nordjs/errors': workspace:*
       '@nordjs/types': workspace:*
+      '@types/express': ~4.17.13
+      express: ~4.18.1
     dependencies:
       '@nordjs/cli': link:../../packages/cli
+      '@nordjs/core': link:../../packages/core
       '@nordjs/errors': link:../../packages/errors
+      express: 4.18.1
     devDependencies:
       '@nordjs/types': link:../../packages/types
+      '@types/express': 4.17.13
 
   ../../packages/cli:
     specifiers:
