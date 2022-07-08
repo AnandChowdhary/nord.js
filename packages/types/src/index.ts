@@ -1,22 +1,15 @@
 import type { Request, Response } from "express";
 
-export interface RequestParams<Body, Query> {
+export interface RequestParams {
   route: string;
   path: string;
   ipAddress: string;
-  body: (schema?: Body) => Body;
-  query: (schema?: Query) => Query;
+  body: (BodyDto?: abstract new (...args: any) => any) => typeof BodyDto;
+  query: (QueryDto?: abstract new (...args: any) => any) => typeof QueryDto;
   params: Request["params"];
   _original: { request: Request; response: Response };
 }
 
 export type JsonResponse = any;
 
-export type Route<
-  Combined extends { body?: any; query?: any } = {
-    body?: any;
-    query?: any;
-  }
-> = (
-  params: RequestParams<Combined["body"], Combined["query"]>
-) => JsonResponse;
+export type Route = (params: RequestParams) => JsonResponse;

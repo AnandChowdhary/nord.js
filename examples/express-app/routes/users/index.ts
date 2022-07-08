@@ -1,5 +1,7 @@
 import type { Route } from "@nordjs/types";
 import { BadRequestException } from "@nordjs/errors";
+import {} from "@nordjs/validator";
+import { CreateUserDto } from "../users.dto";
 
 /**
  * Returns a success message, and randomly throws a bad request exception
@@ -13,15 +15,7 @@ export const get: Route = async (): Promise<{ success: boolean }> => {
   return { success: true };
 };
 
-export const post: Route<{
-  body: {
-    /**
-     * First name of the customer
-     * @maxLength 64
-     */
-    name: string;
-  };
-}> = ({ body }): { result: string } => {
-  const { name } = body();
-  return { result: `hello ${name}` };
+export const post: Route = ({ body }): { result: string } => {
+  const { firstName } = body(CreateUserDto);
+  return { result: `hello ${firstName}` };
 };

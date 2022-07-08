@@ -408,6 +408,10 @@
       "projectFolder": "packages/cli"
     },
     {
+      "packageName": "@nordjs/validator",
+      "projectFolder": "packages/validator"
+    },
+    {
       "packageName": "@nordjs/example-express-app",
       "projectFolder": "examples/express-app"
     }
