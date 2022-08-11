@@ -7,7 +7,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "nord build"
+    "build": "nord build",
+    "dev": "nord dev"
   },
   "keywords": [],
   "author": "",

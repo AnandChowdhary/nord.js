@@ -1,4 +1,6 @@
-import type { Request, Response } from "express";
+import type { Request, Response, RequestHandler } from "express";
+
+export { RequestHandler };
 
 export interface RequestParams {
   route: string;
@@ -13,3 +15,9 @@ export interface RequestParams {
 export type JsonResponse = any;
 
 export type Route = (params: RequestParams) => JsonResponse;
+
+export interface NordManifest {
+  schemaVersion: string;
+  createdAt: number;
+  routes: Record<string, Route>;
+}
