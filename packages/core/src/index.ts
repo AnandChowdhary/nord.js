@@ -11,14 +11,14 @@ export const injectRoutes: (
 ) => RequestHandler = (manifestFunction) => {
   return async (request, response, next) => {
     const { routes } = await manifestFunction();
-    const route =
-      routes[
-        `${request.method === "HEAD" ? "GET" : request.method} ${request.path}`
-      ];
+    const key = `${request.method === "HEAD" ? "GET" : request.method} ${
+      request.path
+    }`;
+    const route = routes[key];
     if (!route) return next();
 
     const result = await route({
-      route,
+      route: key,
       path: request.path,
       query: request.query,
       params: request.params,
