@@ -18,9 +18,12 @@
   "dependencies": {
     "@nordjs/core": "workspace:*",
     "@swc/core": "~1.2.189",
-    "@swc-node/register": "~1.5.1"
+    "@swc-node/register": "~1.5.1",
+    "kill-port-process": "~3.1.0",
+    "minimist": "~1.2.6"
   },
   "devDependencies": {
-    "typescript": "~4.6.4"
+    "typescript": "~4.6.4",
+    "@types/minimist": "~1.2.2"
   }
 }

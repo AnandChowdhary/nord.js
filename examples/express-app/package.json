@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "nord build",
-    "dev": "nord dev"
+    "dev": "nord dev --port=3000"
   },
   "keywords": [],
   "author": "",

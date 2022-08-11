@@ -3,7 +3,7 @@ import express from "express";
 import { nordManifest } from "./nord.gen";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(injectRoutes(nordManifest));
 

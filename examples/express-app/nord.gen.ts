@@ -7,7 +7,7 @@ import { NordManifest } from "@nordjs/types";
 export const nordManifest = async (): Promise<NordManifest> =>
   ({
     schemaVersion: "0.0.0",
-    createdAt: 1660197749479,
+    createdAt: 1660198633400,
     routes: {
       "GET /": (await import("./routes/")).get,
       "GET /users/": (await import("./routes/users/")).get,
