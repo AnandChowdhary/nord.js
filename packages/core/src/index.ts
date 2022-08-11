@@ -1,9 +1,4 @@
-import type {
-  Route,
-  RequestParams,
-  RequestHandler,
-  NordManifest,
-} from "@nordjs/types";
+import type { NordManifest, RequestHandler } from "@nordjs/types";
 import { getClientIp } from "@supercharge/request-ip";
 
 export const injectRoutes: (
@@ -17,19 +12,21 @@ export const injectRoutes: (
     const route = routes[key];
     if (!route) return next();
 
-    const result = await route({
+    const result = route({
       route: key,
       path: request.path,
-      query: request.query,
       params: request.params,
-      body: request.body,
+      query: (obj) => obj.parse(request.query) as any,
+      body: (obj) => obj.parse(request.body) as any,
       ipAddress: getClientIp(request),
       _original: { request, response },
     });
+
     if (request.method === "HEAD") {
       response.status(204);
       response.end();
     } else response.json(result);
+
     return next();
   };
 };

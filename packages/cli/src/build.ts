@@ -15,7 +15,6 @@ import { NordManifest } from "@nordjs/types";
 export const nordManifest = async (): Promise<NordManifest> =>
   ({
     schemaVersion: "0.0.0",
-    createdAt: ${nowTime},
     routes: {`;
   for await (const file of getFiles(join(".", "routes"))) {
     const contents = await readFile(file, "utf8");
@@ -52,11 +51,8 @@ export const nordManifest = async (): Promise<NordManifest> =>
         .replace(/index/g, "");
       if (route.length > 1 && route.endsWith("/"))
         route = route.substring(0, route.length - 1);
-      const key = `${verb}${route.replace(/\W/g, "_")}`;
-
       appJs += `\n      "${verb.toUpperCase()} ${route}": (await import("./routes${route}")).${verb},`;
-
-      console.log(`Mapped ${verb.toUpperCase()} ${route}`);
+      console.log(`⏳ Mapped ${verb.toUpperCase()} ${route}`);
     });
   }
 

@@ -4,6 +4,7 @@ import { exec } from "child_process";
 import type { ChildProcess } from "child_process";
 import { watch } from "chokidar";
 import { build } from "./build";
+import clear = require("console-clear");
 export * from "@swc-node/register";
 import detect = require("detect-port");
 import { killPortProcess } from "kill-port-process";
@@ -31,8 +32,12 @@ void (async (): Promise<void> => {
       );
       running.stdout.on("data", (data) => console.log(data.toString()));
       running.stderr.on("data", (data) => console.error(data.toString()));
+      running.on("exit", (code) => {
+        if (code > 0) process.exit(code);
+      });
     };
     const _restart = async () => {
+      clear();
       await build();
       let isPortAvailable = false;
       let tries = 0;
@@ -56,7 +61,7 @@ void (async (): Promise<void> => {
     watch(path, {
       persistent: true,
       ignoreInitial: true,
-      ignored: ["**/node_modules/**/*", "**/.git/**/*", "**/*.gen.ts"],
+      ignored: ["**/.git/**/*", "**/*.gen.ts"],
     }).on("all", async () => restart());
   }
 })().catch((error): never => {
