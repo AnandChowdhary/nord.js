@@ -1,7 +1,9 @@
 import { HttpStatus } from "./http-status";
+export { HttpStatus };
 
 export class HttpException extends Error {
   code: number;
+  _httpException = true;
 
   constructor({ code, message }: { code: number; message: string }) {
     super(message);
