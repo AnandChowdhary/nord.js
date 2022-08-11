@@ -46,10 +46,12 @@ export const nordManifest = async (): Promise<NordManifest> =>
       )
         return;
 
-      const route = file
+      let route = file
         .replace(resolve(join(".", "routes")), "")
         .replace(/.ts$/, "")
         .replace(/index/g, "");
+      if (route.length > 1 && route.endsWith("/"))
+        route = route.substring(0, route.length - 1);
       const key = `${verb}${route.replace(/\W/g, "_")}`;
 
       appJs += `\n      "${verb.toUpperCase()} ${route}": (await import("./routes${route}")).${verb},`;
