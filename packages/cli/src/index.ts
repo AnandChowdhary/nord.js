@@ -1,15 +1,14 @@
 #! /usr/bin/env node
 
+import { ChildProcess, execSync } from "child_process";
 import { exec } from "child_process";
-import type { ChildProcess } from "child_process";
 import { watch } from "chokidar";
+import { killPortProcess } from "kill-port-process";
+import { resolve } from "path";
 import { build } from "./build";
 import clear = require("console-clear");
-export * from "@swc-node/register";
 import detect = require("detect-port");
-import { killPortProcess } from "kill-port-process";
 import minimist = require("minimist");
-import { resolve } from "path";
 import debounce = require("debounce");
 
 const argv = minimist(process.argv.slice(2));
@@ -19,7 +18,17 @@ const WAIT_TIME = 100; // 100 ms
 const MAX_TRIES = 100; // 100 tries after 100 ms each = 10 seconds
 
 void (async (): Promise<void> => {
-  if (argv._[0] === "build") return build();
+  if (argv._[0] === "build") {
+    await build();
+    const running = exec(
+      "./node_modules/@nordjs/cli/node_modules/typescript/bin/tsc --noEmit"
+    );
+    running.stdout.on("data", (data) => console.log(data.toString()));
+    running.stderr.on("data", (data) => console.error(data.toString()));
+    running.on("exit", (code) => {
+      if (code > 0) process.exit(code);
+    });
+  }
   if (argv._[0] === "dev") {
     let running: ChildProcess;
     const PORT = parseInt(argv.port);

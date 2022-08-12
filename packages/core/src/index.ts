@@ -1,10 +1,6 @@
-import {
-  HttpException,
-  HttpStatus,
-  UnprocessableEntityException,
-} from "@nordjs/errors";
+import { HttpException, HttpStatus } from "@nordjs/errors";
 import type { NordManifest, RequestHandler } from "@nordjs/types";
-import type { ZodIssue } from "@nordjs/validator";
+import type { ZodIssue, ZodObject, ZodRawShape } from "@nordjs/validator";
 import { ZodError } from "@nordjs/validator";
 import { getClientIp } from "@supercharge/request-ip";
 
@@ -30,14 +26,10 @@ export const injectRoutes: (
         route: key,
         path: request.path,
         params: request.params,
-        query: (obj) => obj.parse(request.query) as any,
-        body: (obj) => {
-          if (typeof request.body === "undefined")
-            throw new UnprocessableEntityException(
-              "Request body is not provided"
-            );
-          return obj.parse(request.body) as any;
-        },
+        query: <T extends ZodRawShape>(obj: ZodObject<T>) =>
+          obj.parse(request.query),
+        body: <T extends ZodRawShape>(obj: ZodObject<T>) =>
+          obj.parse(request.body ?? {}),
         ipAddress: getClientIp(request),
         _original: { request, response },
       });
