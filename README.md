@@ -120,7 +120,7 @@ import { createUser } from "../../database.ts";
 
 // Create a new user
 // POST /routes/users
-export const post: Route = ({ useBody }) => {
+export const post: Route = async ({ useBody }) => {
   const data = useBody(z.object({
     name: z.string().optional(),
     email: z.email(),
@@ -163,7 +163,7 @@ export const get: Route = ({ useParams }) => {
 
 // Delete a user
 // DELETE /users/:id
-export const del: Route = ({ useParams }) => {
+export const del: Route = async ({ useParams }) => {
   const { id } = useParams(params);
   await deleteUser(id);
   return { success: true };
@@ -171,7 +171,7 @@ export const del: Route = ({ useParams }) => {
 
 // Update a user
 // PATCH /users/:id
-export const patch: Route = ({ useParams }) => {
+export const patch: Route = async ({ useParams }) => {
   const { id } = useParams(params);
   const data = useBody(z.object({
     name: z.string().optional(),
