@@ -2,6 +2,18 @@
   "name": "@nordjs/cli",
   "entries": [
     {
+      "version": "0.0.2",
+      "tag": "@nordjs/cli_v0.0.2",
+      "date": "Sat, 13 Aug 2022 08:48:56 GMT",
+      "comments": {
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@nordjs/core\" to `0.1.1`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.1",
       "tag": "@nordjs/cli_v0.0.1",
       "date": "Sat, 13 Aug 2022 07:06:58 GMT",

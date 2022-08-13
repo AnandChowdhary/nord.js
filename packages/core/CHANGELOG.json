@@ -2,6 +2,23 @@
   "name": "@nordjs/core",
   "entries": [
     {
+      "version": "0.1.1",
+      "tag": "@nordjs/core_v0.1.1",
+      "date": "Sat, 13 Aug 2022 08:48:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Rename injectRoutes -> useRouter"
+          }
+        ],
+        "dependency": [
+          {
+            "comment": "Updating dependency \"@nordjs/types\" to `0.0.2`"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.0",
       "tag": "@nordjs/core_v0.1.0",
       "date": "Sat, 13 Aug 2022 07:06:58 GMT",
