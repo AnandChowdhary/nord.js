@@ -1,4 +1,4 @@
-# Nord.js
+# [![Nord.js](./assets/logo.svg)](https://nord.js.org)
 
 **Nord.js** is a fast, familiar backend framework for building RESTful APIs in TypeScript.
 
@@ -184,4 +184,6 @@ export const patch: Route = ({ useParams }) => {
 
 ## License
 
-MIT © [Anand Chowdhary](https://anandchowdhary.com)
+- Nord.js source code: [MIT](./LICENSE) © [Anand Chowdhary](https://anandchowdhary.com)
+- Nord.js logo and docs: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) © [Anand Chowdhary](https://anandchowdhary.com)
+- Nord.js icon: [CC BY 3.0](https://thenounproject.com/legal/terms-of-use/#icon-licenses) © [Chris Kerr](https://thenounproject.com/chrisk3rr/) from the [Noun Project](https://thenounproject.com/icon/hexagon-30707/)
