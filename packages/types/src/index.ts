@@ -1,7 +1,7 @@
 import type { ZodType, ZodTypeDef } from "@nordjs/validator";
-import type { Request, RequestHandler, Response } from "express";
+import type { Request, Express, RequestHandler, Response } from "express";
 import type { JsonValue, Promisable } from "type-fest";
-export { RequestHandler };
+export { Express, RequestHandler };
 
 type ZordParse = <
   Output = any,

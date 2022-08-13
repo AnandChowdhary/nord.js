@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from "@nordjs/errors";
-import type { NordManifest, RequestHandler } from "@nordjs/types";
+import type { NordManifest, Express, RequestHandler } from "@nordjs/types";
 import type { ZodIssue } from "@nordjs/validator";
 import { ZodError } from "@nordjs/validator";
 import { getClientIp } from "@supercharge/request-ip";
@@ -10,11 +10,15 @@ interface ErrorResponse {
   validation?: ZodIssue[];
 }
 
-export const injectRoutes: (
-  manifestFunction: () => Promise<NordManifest>
-) => RequestHandler = (manifestFunction) => {
-  return async (request, response, next) => {
-    const { routes } = await manifestFunction();
+export const useRouter: ({
+  app,
+  nordManifest,
+}: {
+  app: Express;
+  nordManifest: () => Promise<NordManifest>;
+}) => void = ({ app, nordManifest }) => {
+  const nordMiddleware: RequestHandler = async (request, response, next) => {
+    const { routes } = await nordManifest();
     const key = `${request.method === "HEAD" ? "GET" : request.method} ${
       request.path
     }`;
@@ -66,4 +70,6 @@ export const injectRoutes: (
 
     return next();
   };
+
+  app.use(nordMiddleware);
 };

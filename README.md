@@ -70,14 +70,14 @@ Your TypeScript configuration file should enable strict mode (set `{ "strict": t
 Each Nord.js application requires an `app.ts` file, which is the main entry point, and it should look like the following:
 
 ```ts
-import { injectRoutes } from "@nordjs/core";
+import { useRouter } from "@nordjs/core";
 import express from "express";
 import { nordManifest } from "./nord.gen";
 
 const app = express();
 const port = process.env.PORT;
 
-app.use(injectRoutes(nordManifest));
+useRouter({ app, nordManifest });
 
 app.listen(port, () => {
   console.log(`✅ Listening on port ${port}`);
@@ -93,7 +93,7 @@ nord dev --port=3000
 The most important line in this file adds the Nord.js middleware which handles routing:
 
 ```ts
-app.use(injectRoutes(nordManifest));
+useRouter({ app, nordManifest });
 ```
 
 ### `routes`
