@@ -171,7 +171,7 @@ export const del: Route = async ({ useParams }) => {
 
 // Update a user
 // PATCH /users/:id
-export const patch: Route = async ({ useParams }) => {
+export const patch: Route = async ({ useBody, useParams }) => {
   const { id } = useParams(params);
   const data = useBody(z.object({
     name: z.string().optional(),
