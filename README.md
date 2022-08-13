@@ -53,6 +53,18 @@ your-app-name
 │       │   ...
 ```
 
+### `tsconfig.json`
+
+Your TypeScript configuration file should enable strict mode (set `{ "strict": true }` under `compilerOptions`), or at least set `strictNullChecks` to `true` for strong types when using validation hooks:
+
+```json
+{
+  "compilerOptions": {
+    "strictNullChecks": true
+  }
+}
+```
+
 ### `app.ts`
 
 Each Nord.js application requires an `app.ts` file, which is the main entry point, and it should look like the following:

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus } from "@nordjs/errors";
 import type { NordManifest, RequestHandler } from "@nordjs/types";
-import type { ZodIssue, ZodObject, ZodRawShape } from "@nordjs/validator";
+import type { ZodIssue } from "@nordjs/validator";
 import { ZodError } from "@nordjs/validator";
 import { getClientIp } from "@supercharge/request-ip";
 
@@ -25,11 +25,9 @@ export const injectRoutes: (
       const result = await route({
         route: key,
         path: request.path,
-        params: request.params,
-        query: <T extends ZodRawShape>(obj: ZodObject<T>) =>
-          obj.parse(request.query),
-        body: <T extends ZodRawShape>(obj: ZodObject<T>) =>
-          obj.parse(request.body ?? {}),
+        useParams: (obj) => obj.parse(request.params),
+        useQuery: (obj) => obj.parse(request.query),
+        useBody: (obj) => obj.parse(request.body ?? {}),
         ipAddress: getClientIp(request),
         _original: { request, response },
       });

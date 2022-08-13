@@ -1,20 +1,23 @@
-import type { z, ZodObject, ZodRawShape, ZodType } from "@nordjs/validator";
+import type { ZodType, ZodTypeDef } from "@nordjs/validator";
 import type { Request, RequestHandler, Response } from "express";
 import type { JsonValue, Promisable } from "type-fest";
-
 export { RequestHandler };
+
+type ZordParse = <
+  Output = any,
+  Def extends ZodTypeDef = ZodTypeDef,
+  Input = Output
+>(
+  x: ZodType<Output, Def, Input>
+) => ReturnType<ZodType<Output, Def, Input>["parse"]>;
 
 export interface RequestParams {
   route: string;
   path: string;
   ipAddress: string;
-  body: <T extends ZodRawShape>(
-    type: ZodObject<T>
-  ) => ReturnType<ZodType<T>["parse"]>>;
-  query: <T extends ZodRawShape>(
-    type: ZodObject<T>
-  ) => ReturnType<ZodType<T>["parse"]>>;
-  params: Request["params"];
+  useBody: ZordParse;
+  useQuery: ZordParse;
+  useParams: ZordParse;
   _original: { request: Request; response: Response };
 }
 
