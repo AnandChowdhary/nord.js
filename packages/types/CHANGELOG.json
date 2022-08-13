@@ -1,0 +1,17 @@
+{
+  "name": "@nordjs/types",
+  "entries": [
+    {
+      "version": "0.0.1",
+      "tag": "@nordjs/types_v0.0.1",
+      "date": "Sat, 13 Aug 2022 07:06:58 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed typechecking for zod validation hooks"
+          }
+        ]
+      }
+    }
+  ]
+}
