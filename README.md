@@ -35,7 +35,7 @@ npm install @nordjs/cli @nordjs/core @nordjs/errors @nordjs/validator express
 Install types as dev dependencies:
 
 ```bash
-npm install –save-dev @nordjs/types @types/express
+npm install @nordjs/types @types/express --save-dev
 ```
 
 Create a directory structure like so:
@@ -123,7 +123,7 @@ import { createUser } from "../../database.ts";
 export const post: Route = async ({ useBody }) => {
   const data = useBody(z.object({
     name: z.string().optional(),
-    email: z.email(),
+    email: z.string().email(),
     password: z.string().min(8, { message: "Password must be 8 characters or longer" })
   }));
   const user = await createUser(data);
@@ -175,7 +175,7 @@ export const patch: Route = async ({ useBody, useParams }) => {
   const { id } = useParams(params);
   const data = useBody(z.object({
     name: z.string().optional(),
-    email: z.email().optional(),
+    email: z.string().email().optional(),
   }));
   const result = await updateUser(id, data);
   return result;
