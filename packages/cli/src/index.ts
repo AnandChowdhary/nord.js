@@ -1,8 +1,8 @@
 #! /usr/bin/env node
 
-import { ChildProcess, execSync } from "child_process";
-import { exec } from "child_process";
+import { ChildProcess, exec } from "child_process";
 import { watch } from "chokidar";
+import { access } from "fs/promises";
 import { killPortProcess } from "kill-port-process";
 import { resolve } from "path";
 import { build } from "./build";
@@ -20,13 +20,32 @@ const MAX_TRIES = 100; // 100 tries after 100 ms each = 10 seconds
 void (async (): Promise<void> => {
   if (argv._[0] === "build") {
     await build();
-    const running = exec(
-      "./node_modules/@nordjs/cli/node_modules/typescript/bin/tsc --noEmit"
-    );
+    let nowTime = Date.now();
+    let hasFile: string | undefined = undefined;
+    for (const potentialFilePath of [
+      "./node_modules/@nordjs/cli/node_modules/typescript/bin/tsc",
+      "./node_modules/typescript/bin/tsc",
+    ]) {
+      if (hasFile) continue;
+      try {
+        await access(resolve(".", potentialFilePath));
+        hasFile = potentialFilePath;
+      } catch (error) {
+        // Ignore errors if unable to access file
+      }
+    }
+    if (!hasFile) throw new Error("Unable to find tsc binary");
+    const running = exec(`${hasFile} --noEmit`);
     running.stdout.on("data", (data) => console.log(data.toString()));
     running.stderr.on("data", (data) => console.error(data.toString()));
     running.on("exit", (code) => {
       if (code > 0) process.exit(code);
+      console.log(
+        `✅ Type checking completed in ${(
+          (Date.now() - nowTime) /
+          1000
+        ).toFixed(2)}s`
+      );
     });
   }
   if (argv._[0] === "dev") {
@@ -35,10 +54,22 @@ void (async (): Promise<void> => {
     process.env.PORT = argv.port;
     if (!PORT) throw new Error("Port not found");
     const path = resolve(".");
-    const run = () => {
-      running = exec(
-        "node -r './node_modules/@nordjs/cli/node_modules/@swc-node/register' app.ts"
-      );
+    const run = async () => {
+      let hasFile: string | undefined = undefined;
+      for (const potentialFilePath of [
+        "./node_modules/@nordjs/cli/node_modules/@swc-node/register",
+        "./node_modules/@swc-node/register",
+      ]) {
+        if (hasFile) continue;
+        try {
+          await access(resolve(".", potentialFilePath));
+          hasFile = potentialFilePath;
+        } catch (error) {
+          // Ignore errors if unable to access file
+        }
+      }
+      if (!hasFile) throw new Error("Unable to find @swc-node/register binary");
+      running = exec(`node -r '${hasFile}' app.ts`);
       running.stdout.on("data", (data) => console.log(data.toString()));
       running.stderr.on("data", (data) => console.error(data.toString()));
       running.on("exit", (code) => {
@@ -63,7 +94,7 @@ void (async (): Promise<void> => {
         isPortAvailable = result === PORT;
       }
       tries = 0;
-      run();
+      await run();
     };
     const restart = debounce(_restart, WAIT_TIME);
     await restart();
