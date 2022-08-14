@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
-        uses: node common/scripts/install-run-rush.js install
+        shell: bash
+        run: node common/scripts/install-run-rush.js install
       - name: Build all packages
-        uses: node common/scripts/install-run-rush.js build
+        shell: bash
+        run: node common/scripts/install-run-rush.js build
