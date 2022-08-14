@@ -1,6 +1,13 @@
 # Change Log - @nordjs/cli
 
-This log was last generated on Sat, 13 Aug 2022 08:48:56 GMT and should not be manually modified.
+This log was last generated on Sun, 14 Aug 2022 15:37:48 GMT and should not be manually modified.
+
+## 0.0.3
+Sun, 14 Aug 2022 15:37:48 GMT
+
+### Patches
+
+- Ensure tsc and @swc-node binaries exist
 
 ## 0.0.2
 Sat, 13 Aug 2022 08:48:56 GMT

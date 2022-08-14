@@ -26,6 +26,8 @@ nord build
 
 ## Getting started
 
+The easiest way to get started is to close this repository and copy and `examples/express-app` folder directory. Alternately, you can set up a Nord.js project from scratch using the instructions below.
+
 Install Nord.js and Express from npm:
 
 ```bash
