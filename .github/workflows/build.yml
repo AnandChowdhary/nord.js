@@ -14,9 +14,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install dependencies
-        shell: bash
-        run: node common/scripts/install-run-rush.js install
-      - name: Build all packages
-        shell: bash
-        run: node common/scripts/install-run-rush.js build
+      # - name: Install dependencies
+      #   shell: bash
+      #   run: node common/scripts/install-run-rush.js install
+      # - name: Build all packages
+      #   shell: bash
+      #   run: node common/scripts/install-run-rush.js build
