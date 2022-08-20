@@ -2,6 +2,18 @@
   "name": "@nordjs/cli",
   "entries": [
     {
+      "version": "0.1.0",
+      "tag": "@nordjs/cli_v0.1.0",
+      "date": "Sat, 20 Aug 2022 06:16:46 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add CLI command \"start\""
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.3",
       "tag": "@nordjs/cli_v0.0.3",
       "date": "Sun, 14 Aug 2022 15:37:48 GMT",

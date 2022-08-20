@@ -1,6 +1,13 @@
 # Change Log - @nordjs/cli
 
-This log was last generated on Sun, 14 Aug 2022 15:37:48 GMT and should not be manually modified.
+This log was last generated on Sat, 20 Aug 2022 06:16:46 GMT and should not be manually modified.
+
+## 0.1.0
+Sat, 20 Aug 2022 06:16:46 GMT
+
+### Minor changes
+
+- Add CLI command "start"
 
 ## 0.0.3
 Sun, 14 Aug 2022 15:37:48 GMT
