@@ -41,8 +41,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@nordjs/example-express-app",
-      "projectFolder": "examples/express-app"
+      "packageName": "@nordjs/development-app",
+      "projectFolder": "packages/development-app"
     }
   ]
 }

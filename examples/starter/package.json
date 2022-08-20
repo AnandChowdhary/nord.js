@@ -1,0 +1,29 @@
+{
+  "name": "@nordjs/starter",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "nord build",
+    "start": "nord start --port=3000",
+    "start:prd": "nord start --port=3000 --mode=production",
+    "dev": "nord dev --port=3000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@nordjs/cli": "latest",
+    "@nordjs/core": "latest",
+    "@nordjs/errors": "latest",
+    "@nordjs/validator": "latest",
+    "express": "~4.18.1"
+  },
+  "devDependencies": {
+    "@nordjs/types": "latest",
+    "@types/express": "~4.17.13"
+  }
+}

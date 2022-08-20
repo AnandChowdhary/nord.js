@@ -6,6 +6,8 @@
      * https://github.com/colinhacks/zod/issues/121#issuecomment-675671241
      */
     "strictNullChecks": true,
+
+    /** Required for correctly importing Express **/
     "esModuleInterop": true
   }
 }

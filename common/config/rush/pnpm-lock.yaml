@@ -5,25 +5,6 @@ importers:
   .:
     specifiers: {}
 
-  ../../examples/express-app:
-    specifiers:
-      '@nordjs/cli': workspace:*
-      '@nordjs/core': workspace:*
-      '@nordjs/errors': workspace:*
-      '@nordjs/types': workspace:*
-      '@nordjs/validator': workspace:*
-      '@types/express': ~4.17.13
-      express: ~4.18.1
-    dependencies:
-      '@nordjs/cli': link:../../packages/cli
-      '@nordjs/core': link:../../packages/core
-      '@nordjs/errors': link:../../packages/errors
-      '@nordjs/validator': link:../../packages/validator
-      express: 4.18.1
-    devDependencies:
-      '@nordjs/types': link:../../packages/types
-      '@types/express': 4.17.13
-
   ../../packages/cli:
     specifiers:
       '@nordjs/core': workspace:*
@@ -77,6 +58,25 @@ importers:
       http-status-codes: 2.2.0
     devDependencies:
       typescript: 4.7.4
+
+  ../../packages/development-app:
+    specifiers:
+      '@nordjs/cli': workspace:*
+      '@nordjs/core': workspace:*
+      '@nordjs/errors': workspace:*
+      '@nordjs/types': workspace:*
+      '@nordjs/validator': workspace:*
+      '@types/express': ~4.17.13
+      express: ~4.18.1
+    dependencies:
+      '@nordjs/cli': link:../cli
+      '@nordjs/core': link:../core
+      '@nordjs/errors': link:../errors
+      '@nordjs/validator': link:../validator
+      express: 4.18.1
+    devDependencies:
+      '@nordjs/types': link:../types
+      '@types/express': 4.17.13
 
   ../../packages/errors:
     specifiers:
