@@ -45,9 +45,13 @@ export default defineConfig({
           { text: "Server-sent events", link: "/tutorials/server-sent-events" },
         ],
       },
+      {
+        text: "About",
+        items: [{ text: "About Nord.js", link: "/about" }],
+      },
     ],
     editLink: {
-      pattern: "https://github.com/AnandChowdhary/nordjs/blob/main/docs/:path",
+      pattern: "https://github.com/AnandChowdhary/nord.js/blob/main/docs/:path",
     },
     footer: {
       message: "Released under the MIT License",
