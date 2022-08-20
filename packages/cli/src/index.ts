@@ -18,6 +18,30 @@ const WAIT_TIME = 100; // 100 ms
 const MAX_TRIES = 100; // 100 tries after 100 ms each = 10 seconds
 
 void (async (): Promise<void> => {
+  let running: ChildProcess;
+  const run = async () => {
+    let hasFile: string | undefined = undefined;
+    for (const potentialFilePath of [
+      "./node_modules/@nordjs/cli/node_modules/@swc-node/register",
+      "./node_modules/@swc-node/register",
+    ]) {
+      if (hasFile) continue;
+      try {
+        await access(resolve(".", potentialFilePath));
+        hasFile = potentialFilePath;
+      } catch (error) {
+        // Ignore errors if unable to access file
+      }
+    }
+    if (!hasFile) throw new Error("Unable to find @swc-node/register binary");
+    running = exec(`node -r '${hasFile}' app.ts`);
+    running.stdout.on("data", (data) => console.log(data.toString()));
+    running.stderr.on("data", (data) => console.error(data.toString()));
+    running.on("exit", (code) => {
+      if (code > 0) process.exit(code);
+    });
+  };
+
   if (argv._[0] === "build") {
     await build();
     let nowTime = Date.now();
@@ -47,35 +71,17 @@ void (async (): Promise<void> => {
         ).toFixed(2)}s`
       );
     });
-  }
-  if (argv._[0] === "dev") {
-    let running: ChildProcess;
+  } else if (argv._[0] === "start") {
+    if (argv.mode !== "production") await build();
+    const PORT = parseInt(argv.port);
+    process.env.PORT = argv.port;
+    if (!PORT) throw new Error("Port not found");
+    await run();
+  } else if (argv._[0] === "dev") {
     const PORT = parseInt(argv.port);
     process.env.PORT = argv.port;
     if (!PORT) throw new Error("Port not found");
     const path = resolve(".");
-    const run = async () => {
-      let hasFile: string | undefined = undefined;
-      for (const potentialFilePath of [
-        "./node_modules/@nordjs/cli/node_modules/@swc-node/register",
-        "./node_modules/@swc-node/register",
-      ]) {
-        if (hasFile) continue;
-        try {
-          await access(resolve(".", potentialFilePath));
-          hasFile = potentialFilePath;
-        } catch (error) {
-          // Ignore errors if unable to access file
-        }
-      }
-      if (!hasFile) throw new Error("Unable to find @swc-node/register binary");
-      running = exec(`node -r '${hasFile}' app.ts`);
-      running.stdout.on("data", (data) => console.log(data.toString()));
-      running.stderr.on("data", (data) => console.error(data.toString()));
-      running.on("exit", (code) => {
-        if (code > 0) process.exit(code);
-      });
-    };
     const _restart = async () => {
       clear();
       await build();

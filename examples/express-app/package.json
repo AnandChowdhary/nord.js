@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "build": "nord build",
+    "start": "nord start --port=3000",
+    "start:prd": "nord start --port=3000 --mode=production",
     "dev": "nord dev --port=3000"
   },
   "keywords": [],
