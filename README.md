@@ -1,4 +1,4 @@
-# [![Nord.js](./assets/logo.svg)](https://nord.js.org)
+# [![Nord.js](./docs/assets/logo.svg)](https://nord.js.org)
 
 **Nord.js** is a fast, familiar backend framework for building RESTful APIs in TypeScript.
 

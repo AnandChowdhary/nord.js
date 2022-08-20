@@ -6,6 +6,9 @@
     "example": "examples"
   },
   "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
     "build": "rush build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/AnandChowdhary/web-framework/issues"
   },
-  "homepage": "https://nord.js.org"
+  "homepage": "https://nord.js.org",
+  "devDependencies": {
+    "vitepress": "^1.0.0-alpha.8",
+    "vue": "^3.2.37"
+  }
 }
