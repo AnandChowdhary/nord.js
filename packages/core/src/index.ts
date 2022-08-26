@@ -1,8 +1,15 @@
 import { HttpException, HttpStatus } from "@nordjs/errors";
-import type { NordManifest, Express, RequestHandler } from "@nordjs/types";
+import type {
+  Express,
+  NordConfig,
+  NordManifest,
+  RequestHandler,
+} from "@nordjs/types";
 import type { ZodIssue } from "@nordjs/validator";
 import { ZodError } from "@nordjs/validator";
 import { getClientIp } from "@supercharge/request-ip";
+import { access, readFile } from "fs/promises";
+import { join } from "path";
 
 interface ErrorResponse {
   status: number;
@@ -10,6 +17,18 @@ interface ErrorResponse {
   validation?: ZodIssue[];
 }
 
+const getConfig = async (): Promise<NordConfig | void> => {
+  try {
+    await access(join(".", "nord.config.ts"));
+    const data = await readFile(join(".", "nord.config.ts"), "utf-8");
+    return JSON.parse(data) as NordConfig;
+  } catch (error) {
+    console.log("ⓘ  No configuration file nord.config.ts found");
+  }
+};
+
+let config: NordConfig = {};
+let _configLoaded = false;
 export const useRouter: ({
   app,
   nordManifest,
@@ -18,10 +37,18 @@ export const useRouter: ({
   nordManifest: () => Promise<NordManifest>;
 }) => void = ({ app, nordManifest }) => {
   const nordMiddleware: RequestHandler = async (request, response, next) => {
+    if (!_configLoaded) {
+      const loaded = await getConfig();
+      if (loaded) config = loaded;
+      _configLoaded = true;
+    }
     const { routes } = await nordManifest();
+    const globalRoutePrefixEnabledForThisRoute =
+      config.globalRoutePrefix &&
+      (config.globalRoutePrefixExcludes ?? []).includes(request.path);
     const key = `${request.method === "HEAD" ? "GET" : request.method} ${
-      request.path
-    }`;
+      globalRoutePrefixEnabledForThisRoute ? config.globalRoutePrefix : ""
+    }${request.path}`;
     const route = routes[key];
     if (!route) return next();
 
@@ -62,6 +89,7 @@ export const useRouter: ({
         } as ErrorResponse);
         response.end();
       } else {
+        console.error(error);
         response.status(HttpStatus.INTERNAL_SERVER_ERROR);
         response.write("Error");
         response.end();

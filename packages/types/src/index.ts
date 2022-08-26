@@ -29,3 +29,8 @@ export interface NordManifest {
   schemaVersion: "0.0.0";
   routes: Record<string, Route>;
 }
+
+export interface NordConfig {
+  globalRoutePrefix?: string;
+  globalRoutePrefixExcludes?: string[];
+}
