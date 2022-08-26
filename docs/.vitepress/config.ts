@@ -8,11 +8,15 @@ export default defineConfig({
     logo: "/assets/logo.svg",
     siteTitle: false,
     nav: [
-      { text: "Documentation", link: "/getting-started" },
+      { text: "Documentation", link: "/about" },
       { text: "Tutorials", link: "/tutorials" },
       { text: "GitHub", link: "https://github.com/AnandChowdhary/nord.js" },
     ],
     sidebar: [
+      {
+        text: "About",
+        items: [{ text: "About Nord.js", link: "/about" }],
+      },
       {
         text: "Introduction",
         items: [
@@ -44,10 +48,6 @@ export default defineConfig({
           { text: "Helmet", link: "/tutorials/helmet" },
           { text: "Server-sent events", link: "/tutorials/server-sent-events" },
         ],
-      },
-      {
-        text: "About",
-        items: [{ text: "About Nord.js", link: "/about" }],
       },
     ],
     editLink: {

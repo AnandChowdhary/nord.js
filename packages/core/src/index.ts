@@ -1,21 +1,15 @@
 import { HttpException, HttpStatus } from "@nordjs/errors";
 import type {
+  ErrorResponse,
   Express,
   NordConfig,
   NordManifest,
   RequestHandler,
 } from "@nordjs/types";
-import type { ZodIssue } from "@nordjs/validator";
 import { ZodError } from "@nordjs/validator";
 import { getClientIp } from "@supercharge/request-ip";
 import { access, readFile } from "fs/promises";
 import { join } from "path";
-
-interface ErrorResponse {
-  status: number;
-  message: string;
-  validation?: ZodIssue[];
-}
 
 const getConfig = async (): Promise<NordConfig | void> => {
   try {

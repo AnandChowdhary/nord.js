@@ -1,4 +1,4 @@
-import type { ZodType, ZodTypeDef } from "@nordjs/validator";
+import type { ZodIssue, ZodType, ZodTypeDef } from "@nordjs/validator";
 import type { Request, Express, RequestHandler, Response } from "express";
 import type { JsonValue, Promisable } from "type-fest";
 export { Express, RequestHandler };
@@ -33,4 +33,10 @@ export interface NordManifest {
 export interface NordConfig {
   globalRoutePrefix?: string;
   globalRoutePrefixExcludes?: string[];
+}
+
+export interface ErrorResponse {
+  status: number;
+  message: string;
+  validation?: ZodIssue[];
 }
