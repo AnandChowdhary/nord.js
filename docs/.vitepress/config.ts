@@ -58,4 +58,14 @@ export default defineConfig({
       copyright: "A project by Anand Chowdhary",
     },
   },
+  head: [
+    [
+      "link",
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/assets/icon.svg",
+      },
+    ],
+  ],
 });
