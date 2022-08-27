@@ -7,7 +7,7 @@
 The easiest way to get started is using the [degit](https://github.com/Rich-Harris/degit) project scaffolding tool and cloning our example repository, which sets up Nord.js in an Express application:
 
 ```bash
-npx degit AnandChowdhary/nord.js/examples/starter my-app
+npx degit AnandChowdhary/nord.js/examples/node-express my-app
 ```
 
 Note that you will need to have a supported version of Node.js installed, preferably 16.17.0 LTS. Then, you can enter the newly created `my-app` directory and install dependencies:
