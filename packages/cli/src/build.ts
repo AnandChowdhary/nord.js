@@ -32,15 +32,15 @@ export const nordManifest = async (): Promise<NordManifest> =>
     verbs.forEach((verb): void => {
       if (
         ![
-          "get",
-          "head",
-          "post",
-          "put",
-          "delete",
-          "connect",
-          "options",
-          "trace",
-          "patch",
+          "GET",
+          "HEAD",
+          "POST",
+          "PUT",
+          "DELETE",
+          "CONNECT",
+          "OPTIONS",
+          "TRACE",
+          "PATCH",
         ].includes(verb)
       )
         return;
@@ -51,8 +51,8 @@ export const nordManifest = async (): Promise<NordManifest> =>
         .replace(/index/g, "");
       if (route.length > 1 && route.endsWith("/"))
         route = route.substring(0, route.length - 1);
-      appJs += `\n      "${verb.toUpperCase()} ${route}": (await import("./routes${route}")).${verb},`;
-      console.log(`⏳ Mapped ${verb.toUpperCase()} ${route}`);
+      appJs += `\n      "${verb} ${route}": (await import("./routes${route}")).${verb},`;
+      console.log(`⏳ Mapped ${verb} ${route}`);
     });
   }
 

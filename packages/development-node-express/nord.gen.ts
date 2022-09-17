@@ -8,7 +8,7 @@ export const nordManifest = async (): Promise<NordManifest> =>
   ({
     schemaVersion: "0.0.0",
     routes: {
-      "GET /": (await import("./routes/")).get,
-      "GET /users": (await import("./routes/users")).get,
+      "GET /": (await import("./routes/")).GET,
+      "GET /users": (await import("./routes/users")).GET,
     },
   } as const);

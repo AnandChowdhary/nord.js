@@ -32,7 +32,7 @@ Access request JSON body, for example `POST /register` in the path `routes/regis
 import type { Route } from "@nordjs/types";
 import { z } from "@nordjs/validator";
 
-export const post: Route = async ({ useBody }) => {
+export const POST: Route = async ({ useBody }) => {
   const data = useBody(
     z.object({
       name: z.string().optional(),
@@ -59,7 +59,7 @@ Access URL query parameters, for example `GET /example?id=user_2a3e00bc` in the 
 import type { Route } from "@nordjs/types";
 import { z } from "@nordjs/validator";
 
-export const get: Route = async ({ useQuery }) => {
+export const GET: Route = async ({ useQuery }) => {
   const data = useQuery(
     z.object({
       id: z.string().startsWith("user_", {
@@ -79,7 +79,7 @@ Access URL query parameters, for example `GET /users/user_2a3e00bc` in the path 
 import type { Route } from "@nordjs/types";
 import { z } from "@nordjs/validator";
 
-export const get: Route = async ({ useParams }) => {
+export const GET: Route = async ({ useParams }) => {
   const data = useParams(
     z.object({
       id: z.string().startsWith("user_", {
