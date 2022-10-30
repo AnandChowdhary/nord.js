@@ -18,6 +18,9 @@ const WAIT_TIME = 100; // 100 ms
 const MAX_TRIES = 100; // 100 tries after 100 ms each = 10 seconds
 
 void (async (): Promise<void> => {
+  const debug = process.env.DEBUG === "true";
+  if (debug) console.log(`ℹ️ Verbose logging enabled (debug mode)`);
+
   let running: ChildProcess;
   const run = async () => {
     let hasFile: string | undefined = undefined;

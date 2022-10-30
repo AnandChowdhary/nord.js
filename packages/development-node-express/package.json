@@ -1,5 +1,5 @@
 {
-  "name": "@nordjs/development-nodejs-express",
+  "name": "@nordjs/development-node-express",
   "version": "0.0.0",
   "description": "",
   "main": "dist/index.js",

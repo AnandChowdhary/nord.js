@@ -59,7 +59,7 @@ importers:
     devDependencies:
       typescript: 4.7.4
 
-  ../../packages/development-nodejs-express:
+  ../../packages/development-node-express:
     specifiers:
       '@nordjs/cli': workspace:*
       '@nordjs/core': workspace:*

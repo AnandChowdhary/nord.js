@@ -18,8 +18,8 @@ features:
     title: Super fast
     details: Nord.js is based on SWC, an ultra-fast Rust-based tool, so servers start in milliseconds.
   - icon: 💪
-    title: First-class TypeScript
-    details: Write strongly typed code on the backend wih built-in data validation.
+    title: First-class TypeScript & OpenAPI
+    details: Write strongly typed code wih built-in data validation and generate OpenAPI schemas.
   - icon: 🗃
     title: File-based routing
     details: Create API routes by exporting functions in files, just like you do on the frontend.

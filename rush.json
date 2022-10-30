@@ -41,8 +41,8 @@
       "shouldPublish": true
     },
     {
-      "packageName": "@nordjs/development-nodejs-express",
-      "projectFolder": "packages/development-nodejs-express"
+      "packageName": "@nordjs/development-node-express",
+      "projectFolder": "packages/development-node-express"
     }
   ]
 }
