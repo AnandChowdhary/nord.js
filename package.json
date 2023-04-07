@@ -1,0 +1,27 @@
+{
+  "name": "nordjs",
+  "version": "0.0.0",
+  "description": "Nord.js is a fast and familiar backend framework for building RESTful APIs in TypeScript",
+  "keywords": [],
+  "homepage": "https://nord.js.org",
+  "bugs": {
+    "url": "https://github.com/AnandChowdhary/nord.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnandChowdhary/nord.js.git"
+  },
+  "license": "MIT",
+  "author": "Anand Chowdhary <mail@anandchowdhary.com>",
+  "main": "index.js",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "task:dependabot": "node --loader ts-node/esm scripts/dependabot.ts",
+    "test": "turbo run test"
+  },
+  "dependencies": {
+    "turbo": "latest"
+  }
+}
