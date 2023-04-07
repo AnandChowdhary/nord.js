@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnandChowdhary/web-framework.git"
+    "url": "git+https://github.com/AnandChowdhary/nord.js.git"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AnandChowdhary/web-framework/issues"
+    "url": "https://github.com/AnandChowdhary/nord.js/issues"
   },
   "homepage": "https://nord.js.org",
   "devDependencies": {
