@@ -1,0 +1,8 @@
+{
+  "name": "@nordjs/example-nodejs",
+  "version": "0.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "nordjs": "workspace:*"
+  }
+}

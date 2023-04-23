@@ -1,0 +1,14 @@
+{
+  "name": "nordjs",
+  "version": "0.0.0",
+  "bin": "cli.ts",
+  "main": "index.ts",
+  "scripts": {
+    "build": "node ./cli.ts build"
+  },
+  "dependencies": {
+    "hono": "^3.1.5",
+    "type-fest": "^3.8.0",
+    "zod": "^3.21.4"
+  }
+}

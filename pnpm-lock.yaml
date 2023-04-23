@@ -1,11 +1,37 @@
 lockfileVersion: '6.0'
 
-dependencies:
-  turbo:
-    specifier: latest
-    version: 1.8.8
+importers:
+
+  .:
+    dependencies:
+      turbo:
+        specifier: latest
+        version: 1.8.8
+
+  examples/nodejs:
+    dependencies:
+      nordjs:
+        specifier: workspace:*
+        version: link:../../packages/nordjs
+
+  packages/nordjs:
+    dependencies:
+      hono:
+        specifier: ^3.1.5
+        version: 3.1.5
+      type-fest:
+        specifier: ^3.8.0
+        version: 3.8.0
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
 
 packages:
+
+  /hono@3.1.5:
+    resolution: {integrity: sha512-ypFLhNYoXXtep4I9zJt3VpB5/Ze3p9BLU4dpnAp7fxHOmSg8lu/Wwjs5sTJnb2GwVdfjbt9KFB9alA4Zt/P0jw==}
+    engines: {node: '>=16.0.0'}
+    dev: false
 
   /turbo-darwin-64@1.8.8:
     resolution: {integrity: sha512-18cSeIm7aeEvIxGyq7PVoFyEnPpWDM/0CpZvXKHpQ6qMTkfNt517qVqUTAwsIYqNS8xazcKAqkNbvU1V49n65Q==}
@@ -66,4 +92,13 @@ packages:
       turbo-linux-arm64: 1.8.8
       turbo-windows-64: 1.8.8
       turbo-windows-arm64: 1.8.8
+    dev: false
+
+  /type-fest@3.8.0:
+    resolution: {integrity: sha512-FVNSzGQz9Th+/9R6Lvv7WIAkstylfHN2/JYxkyhhmKFYh9At2DST8t6L6Lref9eYO8PXFTfG9Sg1Agg0K3vq3Q==}
+    engines: {node: '>=14.16'}
+    dev: false
+
+  /zod@3.21.4:
+    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
