@@ -1,7 +1,6 @@
 {
   "name": "nordjs",
   "version": "0.0.0",
-  "bin": "cli.ts",
   "main": "index.ts",
   "scripts": {
     "build": "node ./cli.ts build"
