@@ -1,7 +1,7 @@
 import { route, z } from "nordjs";
 
 /** Check if the API is up by responding with a success message or challenge */
-export const GET = route(
+const getHealth = route(
   {
     query: { challenge: z.string().optional() },
     response: z.union([
@@ -14,3 +14,5 @@ export const GET = route(
     return json({ success: true });
   }
 );
+
+export default getHealth;
