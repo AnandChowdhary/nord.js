@@ -1,7 +1,10 @@
 {
   "name": "@nordjs/example-nodejs",
   "version": "0.0.0",
-  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm app.ts"
+  },
   "dependencies": {
     "nordjs": "workspace:*"
   }
