@@ -14,7 +14,15 @@ importers:
         specifier: workspace:*
         version: link:../../packages/nordjs
 
-  packages/node: {}
+  packages/cli:
+    dependencies:
+      typescript:
+        specifier: ^5.0.0
+        version: 5.0.2
+    devDependencies:
+      bun-types:
+        specifier: ^0.5.0
+        version: 0.5.0
 
   packages/nordjs:
     dependencies:
@@ -24,11 +32,18 @@ importers:
       type-fest:
         specifier: ^3.8.0
         version: 3.8.0
+      urlpattern-polyfill:
+        specifier: ^8.0.2
+        version: 8.0.2
       zod:
         specifier: ^3.21.4
         version: 3.21.4
 
 packages:
+
+  /bun-types@0.5.0:
+    resolution: {integrity: sha512-W74XkTKdOP2HV1PbzL7k6+8TZlcJyj1IuD7y9wX2SiHIaVjlqVwM9fXgsCvTlQQqkkkyZxSPSDFF10J6qml2eA==}
+    dev: true
 
   /hono@3.1.5:
     resolution: {integrity: sha512-ypFLhNYoXXtep4I9zJt3VpB5/Ze3p9BLU4dpnAp7fxHOmSg8lu/Wwjs5sTJnb2GwVdfjbt9KFB9alA4Zt/P0jw==}
@@ -99,6 +114,16 @@ packages:
   /type-fest@3.8.0:
     resolution: {integrity: sha512-FVNSzGQz9Th+/9R6Lvv7WIAkstylfHN2/JYxkyhhmKFYh9At2DST8t6L6Lref9eYO8PXFTfG9Sg1Agg0K3vq3Q==}
     engines: {node: '>=14.16'}
+    dev: false
+
+  /typescript@5.0.2:
+    resolution: {integrity: sha512-wVORMBGO/FAs/++blGNeAVdbNKtIh1rbBL2EyQ1+J9lClJ93KiiKe8PmFIVdXhHcyv44SL9oglmfeSsndo0jRw==}
+    engines: {node: '>=12.20'}
+    hasBin: true
+    dev: false
+
+  /urlpattern-polyfill@8.0.2:
+    resolution: {integrity: sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==}
     dev: false
 
   /zod@3.21.4:

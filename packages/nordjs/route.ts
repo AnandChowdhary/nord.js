@@ -20,6 +20,7 @@ export const route = <
 
 export const init = async (app: Hono, { routes }: Manifest) => {
   routes.forEach(({ method: verb, pathname, route: _route }) => {
+    console.debug(`Registering ${verb.toUpperCase()} ${pathname}`);
     app[verb as "get"](
       pathname,
       async ({
@@ -33,6 +34,8 @@ export const init = async (app: Hono, { routes }: Manifest) => {
         jsonT,
         ...context
       }) => {
+        console.debug(`Handling ${verb.toUpperCase()} ${pathname}`);
+
         try {
           const { routeParams, method } = _route as ReturnType<typeof route>;
           const pattern = new URLPattern({ pathname });
@@ -55,6 +58,8 @@ export const init = async (app: Hono, { routes }: Manifest) => {
           const body =
             (await routeParams.body?.parseAsync(uncheckedBody)) ?? {};
 
+          console.debug({ params, query, body });
+
           const result = await method({
             ...context,
             req,
@@ -68,6 +73,8 @@ export const init = async (app: Hono, { routes }: Manifest) => {
             json,
             jsonT,
           });
+
+          console.debug({ result: typeof result });
           return result;
         } catch (error) {
           console.error(error);
