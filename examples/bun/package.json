@@ -1,0 +1,9 @@
+{
+  "name": "@nordjs/example-bun",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "bun run --hot app.ts"
+  },
+  "dependencies": {}
+}
