@@ -3,7 +3,6 @@ import type { TypedResponse } from "hono/dist/types/types";
 import type { StatusCode } from "hono/utils/http-status";
 import type { JSONValue } from "hono/utils/types";
 import type { ZodType, z } from "zod";
-import type { route } from "./route";
 
 declare type HeaderRecord = Record<string, string | string[]>;
 interface JSONRespond<T> {
@@ -39,7 +38,12 @@ export type MethodParams<
   jsonT: JSONTRespond<z.infer<ZodResponse>>;
 };
 
-export interface RouteParams<ZodQuery, ZodParams, ZodBody, ZodResponse> {
+export interface RouteParams<
+  ZodQuery extends Record<string, ZodType<any, any, any>>,
+  ZodParams extends Record<string, ZodType<any, any, any>>,
+  ZodBody extends ZodType<any, any, any>,
+  ZodResponse extends ZodType<any, any, any>
+> {
   scopes?: string[];
   query?: ZodQuery;
   params?: ZodParams;
@@ -57,11 +61,13 @@ export type Method =
   | "options"
   | "patch";
 
-export type Manifest = Record<
-  string,
-  {
+export type Manifest = {
+  routes: {
     method: Method;
-    path: string;
-    route: ReturnType<typeof route>;
-  }
->;
+    pathname: string;
+    route: {
+      routeParams: any;
+      method: (methodParams: any) => Response | Promise<Response>;
+    };
+  }[];
+};
