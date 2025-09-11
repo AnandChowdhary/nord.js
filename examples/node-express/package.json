@@ -20,7 +20,7 @@
     "@nordjs/core": "latest",
     "@nordjs/errors": "latest",
     "@nordjs/validator": "latest",
-    "express": "~4.18.1"
+    "express": "~4.20.0"
   },
   "devDependencies": {
     "@nordjs/types": "latest",
